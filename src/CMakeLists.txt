@@ -419,6 +419,12 @@ function(compile_glsl run_target_name)
 
 endfunction()
 
+# alvrxr testing: D3D11 under MinGW, with DirectXMath from DIRECTXMATH_DIR
+if(MINGW AND DIRECTXMATH_DIR)
+    set(XR_USE_GRAPHICS_API_D3D11 TRUE)
+    add_definitions(-DXR_USE_GRAPHICS_API_D3D11)
+    include_directories(${DIRECTXMATH_DIR}/Inc)
+endif()
 # Not available in MinGW
 if(MSVC)
     set(XR_USE_GRAPHICS_API_D3D11 TRUE)

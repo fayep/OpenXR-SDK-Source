@@ -414,7 +414,7 @@ check_c_compiler_flag(-Wc++20-extensions HAVE_CPP20_EXTENSIONS)
 
 if(HAVE_UNDEF)
     target_compile_options(
-            openxr_loader PRIVATE -Werror=undef)
+            openxr_loader PRIVATE -Wno-undef)
 endif()
 if(HAVE_TAUTOLOGICAL_TYPE_LIMIT)
     target_compile_options(
