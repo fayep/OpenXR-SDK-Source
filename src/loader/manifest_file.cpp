@@ -251,7 +251,7 @@ static void ReadDataFilesInSearchPaths(const std::string &override_env_var, cons
     AddFilesInPath(search_path, true, manifest_files);
 }
 
-#ifdef XR_OS_LINUX
+#if defined(XR_OS_LINUX) || defined(XR_OS_APPLE)
 
 // Get an XDG environment variable with a $HOME-relative default
 static std::string GetXDGEnvHome(const char *name, const char *fallback_path) {
@@ -672,7 +672,7 @@ XrResult RuntimeManifestFile::FindManifestFiles(const std::string &openxr_comman
         filename = filenames[0];
         LoaderLogger::LogInfoMessage(openxr_command,
                                      "RuntimeManifestFile::FindManifestFiles - using registry-specified runtime file " + filename);
-#elif defined(XR_OS_LINUX)
+#elif defined(XR_OS_LINUX) || defined(XR_OS_APPLE)
 
         if (!FindXDGConfigFile("openxr/", XR_VERSION_MAJOR(XR_CURRENT_API_VERSION), filename)) {
             LoaderLogger::LogErrorMessage(
